@@ -1,0 +1,19 @@
+<body>
+    <main>
+        <h1>PARKING APP</h1>
+        <h2>Gestioná tu estacionamiento de manera sencilla</h2>
+        <div class="formulario">
+            <h3>¡Bienvenido!</h3>
+            <form>
+                <div class="form">
+                    <input type="text" id="usuario" placeholder="Usuario" required>
+                </div>
+                <div class="form">
+                    <input type="text" id="contraseña" placeholder="Contraseña" required>
+                </div>
+                <button [routerLink]="['/dashboard']" id="boton1">Iniciar sesión</button><!--linkeado con logincomponent.ts-->
+                <button [routerLink]="['/register-cochera']" id="boton2">Registrarse</button>
+            </form>
+        </div>
+    </main>
+</body>

@@ -1,0 +1,128 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url(../../../../public/imagenes/Underground_parking_lot_20210223_BW.jpg);
+    background-size: cover;
+}
+
+table {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #6e0606e5;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+thead tr {
+    font-size: 25px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-family:'Lucida Sans';
+}
+
+tbody {
+    background-color: rgba(0, 0, 0, 0.774);
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    height: 31rem;
+    overflow: auto;
+    color: white;
+    font-family:'Lucida Sans';
+}
+
+tbody tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+td {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex: 1;/**/
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 25%;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 25px;
+    border-radius: 12px;
+    border-width: 1px;
+    margin: 5px;
+    cursor: pointer;
+    font-family:'Lucida Sans';
+}
+
+.botonaccmas {
+    padding: 5px 15px;
+    border-radius: 12px;
+    font-size: 25px;
+    background-color: #e2e2e2;
+    color: rgb(0, 0, 0);
+}
+.botonacc {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 17px;
+    background-color: #640202;
+    color: white;
+}
+
+.botonborrartodo {
+    padding: 20px 30px;
+    border-radius: 12px;
+    font-size: 20px;
+    background-color: #030303ec;
+    color: white;
+}
+a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 25px;
+    text-decoration: none;
+    margin: 5px;
+    background-color: #030303ec;
+    color: white;
+    border-radius: 12px;
+    font-size: 20px;
+    font-family:'Lucida Sans';
+}
+
+.vacio {
+    display: flex;
+    flex-direction: column;
+    font-size: 35px;
+    margin-top: 10rem;
+}
+.mas1 {
+        font-size: 40px;
+        padding-inline: 25px;
+        border-width: 2px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+}
