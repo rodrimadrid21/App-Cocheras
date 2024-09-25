@@ -18,20 +18,39 @@ export class DataCocherasService {
 
   isAdmin: boolean = true;
 
+  toggleCochera(index: number) {
+  this.cocheras[index].dispo = this.cocheras[index].dispo === 'Ocupado' ? 'Disponible' : 'Ocupado';
+  }
+
+  // Método para obtener las cocheras
+  getCocheras() {
+    return this.cocheras;
+  }
+
   Funcionborrar(){
     this.cocheras = []
   };
 
+  deshabilitarCochera(index:number){
+    this.cocheras[index].dispo = "Ocupado";
+  }
+
+  habilitarCochera(index:number){
+    this.cocheras[index].dispo = "Disponible";
+  }
+
   funcionBorrar1(indice: number) {
     this.cocheras.splice(indice, 1)
   };
-
-  ultnro = this.cocheras[this.cocheras.length-1].nro//ultimo numero
   
+//ultimo numero
+  ultnro = this.cocheras.length > 0 ? this.cocheras[this.cocheras.length - 1].nro : 0;
+
   Funcionsuma(){
     this.cocheras.push({
       nro: this.ultnro+1,
-      dispo: true,
+      dispo: "Disponible",
+      nodispo: "Ocupado",
       ingreso: '-',
       acc: '-'
     })
@@ -58,6 +77,9 @@ export class DataCocherasService {
       }
     });
   }
+
+
+  
 }
 
 

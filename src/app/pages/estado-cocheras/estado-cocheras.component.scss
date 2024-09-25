@@ -1,45 +1,48 @@
+
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center;/*va horizontal por el column*/
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-image: url(../../../../public/imagenes/Underground_parking_lot_20210223_BW.jpg);
+    background-color: rgb(11, 11, 11);
     background-size: cover;
+    overflow-y: hidden;/*elimina el scroll vertical*/
 }
 
 table {
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin-bottom: 20px;
+    margin-top: 4rem;
 }
 
 thead {
-    background-color: #6e0606e5;
+    background-color: #053f4e;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
 
 thead tr {
-    font-size: 25px;
     color: white;
     display: flex;
     flex-direction: row;
     width: 100%;
-    font-family:'Lucida Sans';
+    font-family:'Arial';
+    font-weight: bold;
 }
 
 tbody {
     background-color: rgba(0, 0, 0, 0.774);
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
-    height: 31rem;
+    height: 26rem;
     overflow: auto;
     color: white;
-    font-family:'Lucida Sans';
+    font-family:'Arial';
+    margin-bottom: 2rem;
+    padding-top: 10px;
 }
 
 tbody tr {
@@ -57,16 +60,17 @@ td {
     padding: 10px;
     flex: 1;/**/
 }
-
-.buttons-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 25%;
+#dispo {
+    background-color: rgb(0, 94, 0);
+    border-radius: 20px;
 }
-
+#nodispo {
+    background-color: rgb(89, 0, 0);
+    border-radius: 20px;
+}
 button {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 8px 25px;
@@ -74,22 +78,65 @@ button {
     border-width: 1px;
     margin: 5px;
     cursor: pointer;
-    font-family:'Lucida Sans';
+    font-family:'Arial';
+}
+#accion {
+    display: flex;
+    gap: 15px
+}
+.deshabilitado {
+    margin: 0;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    padding: 13px 20px;
+}
+.deshabilitado:hover {
+    background-color: #c4c4c4;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+.habilitado {
+    margin: 0;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    padding: 13px 37px;
+}
+.habilitado:hover {
+    background-color: #c4c4c4;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+.botonelim {
+    margin-left: 5px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    color: #ff0000;
+}
+.botonelim:hover {
+    background-color: #c4c4c4;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
 }
 
 .botonaccmas {
-    padding: 5px 15px;
+    padding: 20px 30px;
     border-radius: 12px;
-    font-size: 25px;
-    background-color: #e2e2e2;
-    color: rgb(0, 0, 0);
-}
-.botonacc {
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-size: 17px;
-    background-color: #640202;
+    font-size: 20px;
+    background-color: #030303ec;
     color: white;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content:center;
+    flex-direction: row;
+    width: 50%;
+    gap: 20px;
 }
 
 .botonborrartodo {
@@ -99,25 +146,22 @@ button {
     background-color: #030303ec;
     color: white;
 }
-a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 25px;
+.bye {
+    padding: 20px 30px;
     text-decoration: none;
     margin: 5px;
     background-color: #030303ec;
     color: white;
     border-radius: 12px;
     font-size: 20px;
-    font-family:'Lucida Sans';
+    font-family:'Arial';
 }
-
+/*desmotivo*/
 .vacio {
     display: flex;
     flex-direction: column;
-    font-size: 35px;
-    margin-top: 10rem;
+    font-size: 30px;
+    margin-top: 7rem;
 }
 .mas1 {
         font-size: 40px;
@@ -126,3 +170,8 @@ a {
         margin-top: 2rem;
         margin-bottom: 2rem;
 }
+.mas1:hover {
+    background-color: #c4c4c4;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+

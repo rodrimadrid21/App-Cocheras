@@ -16,64 +16,90 @@ h1 {
     justify-content: center;
     font-size: 85px;
     margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    color: #e70013;
-    text-shadow: 2px 2px 0px black, /* Sombras alrededor del texto para simular un borde */
-    -2px 2px 0px black,
-    2px -2px 0px black,
-    -2px -2px 0px black;
-    font-family:'Lucida Sans';
+    margin-bottom: 2rem;
+    color: #006781;
+    text-shadow: 1px 1px 0px white, /* Sombras alrededor del texto para simular un borde */
+    -1px 1px 0px white,
+    1px -1px 0px white,
+    -1px -1px 0px white;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:900;
+    
 }
 
 h2 {
-    color:#fac71f;
-    font-size: 25px;
+    color:white;
+    font-size: 23px;
     display:flex;
     justify-content: center;
     margin-bottom: 5rem;
-    font-family:'Lucida Sans';
-    text-shadow: 3px 3px 20px black;
+    font-family:'Arial';
+    font-weight: 500;
+    text-shadow: 20px 20px 10px black;
 }
 
 .formulario {
-    background-color: rgba(0, 0, 0, 0.774);
-    padding-top: 10px;
-    padding-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.918);
+    padding-top: 25px;
+    padding-bottom: 30px;
     border-radius: 20px;
     max-width: 600px;
     font-family: monospace;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin:auto;
-
 }
 
 h3 {
+    display: flex;
+    justify-content: center;
     color:#edf6ee;
-    font-size: 50px;
-    margin-left: 8rem;
-    margin-top: 0.5rem;
-    margin-bottom: 3rem;
-    font-family:'Lucida Sans';
+    font-size: 35px;
+    margin-bottom: 2rem;
+    font-family:'Arial';
+    font-weight: bold;
     text-shadow: 3px 3px 20px black;
 }
-.form input {
-    margin-left: 5rem;
-    width: 430px;
-    font-size: 1.1rem;
-    font-family:'Lucida Sans';
+
+input {
+    margin-left: 3rem;
+    background-color: rgba(31, 31, 31, 0.801);
+    color: #FFFFFF;
+    border: 2px solid #004F54;
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%;
+    font-size: 16px;
     margin-bottom: 2rem;
-    background-color:rgba(44, 44, 44, 0.788);
+    outline: none;
+    
 }
+
+input:focus {
+    transition: border-color 0.3s;
+    border-color: #007d88;
+    box-shadow: 0 0 8px rgba(0, 109, 119, 0.5);
+}
+
 button {
     width: 213px;
     margin-top: 0.5rem;
     padding: 1rem;
-    background-color: #000000;
+    background-color: #006D77;
+    border: 2px solid #004F54;
     color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     font-size: 20px;
-    font-family:'Lucida Sans';
+    font-family:'Arial';
+    font-weight: bold;
+    cursor: pointer;
 }
+
+button:hover {
+    background-color: #004F54;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
 #boton1{
         margin-left: 5rem;
 }

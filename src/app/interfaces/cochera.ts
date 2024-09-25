@@ -1,6 +1,7 @@
 export interface iCochera {
     nro: number,
-    dispo: boolean,
+    dispo: string,
+    nodispo:string,
     ingreso: string,
     acc: string
 }

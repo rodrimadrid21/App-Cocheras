@@ -11,8 +11,8 @@
                 <div class="form">
                     <input type="text" id="contraseña" placeholder="Contraseña" required>
                 </div>
-                <button [routerLink]="['/dashboard']" id="boton1">Iniciar sesión</button><!--linkeado con logincomponent.ts-->
-                <button [routerLink]="['/register-cochera']" id="boton2">Registrarse</button>
+                <button (click)="login()" id="boton1">Iniciar sesión</button><!--linkeado con logincomponent.ts-->
+                <button id="boton2" type="button" (click)="register()">Registrarse</button>
             </form>
         </div>
     </main>

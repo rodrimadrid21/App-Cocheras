@@ -1,0 +1,38 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #032831;
+    gap: 40rem;
+}
+h1 {
+    font-size: 45px;
+    color: #006781;
+    text-shadow: 1px 1px 0px white, /* Sombras alrededor del texto para simular un borde */
+    -1px 1px 0px white,
+    1px -1px 0px white,
+    -1px -1px 0px white;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:900;
+    margin-left: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1.3rem;
+}
+.links {
+    display: flex;
+    font-family:Arial;
+    font-size: 28px;
+    font-weight: bold;
+    gap: 20px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.3rem;
+    margin-right: 10rem;
+}
+a {
+    color:white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #00b1a8;
+}

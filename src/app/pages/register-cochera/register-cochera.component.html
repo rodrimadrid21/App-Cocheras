@@ -1,5 +1,6 @@
 <body>
     <main>
+        
         <form>
             <h1>Registrate :)</h1>
             <div class="form">
@@ -14,7 +15,10 @@
             <div class="form">
                 <input type="text" id="contraseña" placeholder="Contraseña" required>
             </div>
-            <button [routerLink]="['/dashboard']" id="boton2">Registrarse</button>
+            <div class="form">
+                <input type="text" id="contraseñax2" placeholder="Repita la contraseña" required>
+            </div>
+            <button [routerLink]="['/dashboard/estado-cocheras']" id="boton2">Registrarse</button>
         </form>
     </main>
 </body>

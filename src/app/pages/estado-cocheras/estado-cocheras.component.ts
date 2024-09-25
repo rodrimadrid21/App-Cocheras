@@ -27,9 +27,22 @@ export class EstadoCocherasComponent {
     return this.dataCocheraService.isAdmin;
   }
   
+  // Método para alternar el estado de la cochera
+  toggleCochera(index: number) {
+    this.dataCocheraService.toggleCochera(index);
+  }
+
   // Métodos para llamar a las funciones del servicio
   Funcionsuma() {
     this.dataCocheraService.Funcionsuma();
+  }
+
+  habilitarCochera(index:number) {
+    this.dataCocheraService.habilitarCochera(index)
+  }
+
+  deshabilitarCochera(index:number) {
+    this.dataCocheraService.deshabilitarCochera(index)
   }
 
   alert(index: number) {
@@ -39,4 +52,7 @@ export class EstadoCocherasComponent {
   Funcionborrar() {
     this.dataCocheraService.Funcionborrar();
   }
+
+  
+
 }

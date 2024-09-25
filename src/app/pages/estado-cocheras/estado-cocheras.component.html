@@ -15,12 +15,21 @@
             @for (cochera of cocheras; track $index) {
                 <tr>
                     <td>{{ cochera.nro }}</td>
-                    <td>{{ cochera.dispo }}</td>
+                    @if(cochera.dispo==="Disponible"){
+                        <td id="dispo">{{ cochera.dispo }}</td>
+                    } @else {
+                        <td id="nodispo">{{ cochera.nodispo }}</td>
+                    }
                     <td>{{ cochera.ingreso }}</td>
                     <td id="accion">
+                        @if(cochera.dispo === "Disponible"){
+                            <button class="deshabilitado" (click)="toggleCochera($index)">Deshabilitar</button>
+                        } @else {
+                            <button class="habilitado" (click)="toggleCochera($index)">Habilitar</button>
+    
+                        }
                         @if ((isAdmin)){
-                        <button class="botonaccmas" (click)="Funcionsuma()">+</button>
-                        <button class="botonacc" (click)="alert($index)">Eliminar</button>
+                        <button class="botonelim" (click)="alert($index)">✖</button>
                         }
                     </td>
                 </tr>
@@ -37,7 +46,8 @@
     </table>
 
     <div class="buttons-container">
+        <button class="botonaccmas" (click)="Funcionsuma()">Agregar Cochera</button>
         <button class="botonborrartodo" (click)="Funcionborrar()">Borrar todo</button>
-        <a [routerLink]="['/login']">Cerrar sesión</a>
+        <button class="bye"[routerLink]="['/login']">Cerrar sesión</button>
     </div>
 </body>
