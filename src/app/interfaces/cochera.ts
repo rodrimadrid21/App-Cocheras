@@ -1,7 +1,6 @@
 export interface iCochera {
-    nro: number,
-    dispo: string,
-    nodispo:string,
-    ingreso: string,
-    acc: string
+    id: number,
+    descripcion: string,
+    deshabilitada:number,
+    eliminada: number
 }

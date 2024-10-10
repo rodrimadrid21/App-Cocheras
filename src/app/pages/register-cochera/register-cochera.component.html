@@ -1,24 +1,18 @@
 <body>
     <main>
-        
-        <form>
+        <div class="form">
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)" class="register">
+            
             <h1>Registrate :)</h1>
+                <input type="text" name="username" ngModel placeholder="Usuario" required>
+                <input type="text" name="nombre" ngModel placeholder="Nombre" required>
+                <input type="text" name="apellido" ngModel placeholder="Apellido" required>
+                <input type="password" name="password" ngModel placeholder="Contraseña" required>
             <div class="form">
-                <input type="text" id="Nombre Completo" placeholder="Nombre" required>
+                <input type="password" id="contraseñax2" placeholder="Repita la contraseña" required>
             </div>
-            <div class="form">
-                <input type="text" id="usuario" placeholder="Usuario" required>
-            </div>
-            <div class="form">
-                <input type="text" id="email" placeholder="Email" required>
-            </div>
-            <div class="form">
-                <input type="text" id="contraseña" placeholder="Contraseña" required>
-            </div>
-            <div class="form">
-                <input type="text" id="contraseñax2" placeholder="Repita la contraseña" required>
-            </div>
-            <button [routerLink]="['/dashboard/estado-cocheras']" id="boton2">Registrarse</button>
+            <button [disabled]="registerForm.invalid" type="submit" id="boton2">Registrarse</button>
         </form>
+    </div>
     </main>
 </body>

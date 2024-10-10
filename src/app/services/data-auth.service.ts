@@ -1,33 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Login, ResLogin } from '../interfaces/login';
 import { Usuario } from '../interfaces/usuario';
+import { Login, ResLogin } from '../interfaces/login';
+import { NgForm } from '@angular/forms';
+import { Register } from '../interfaces/register';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataAuthService {
 
-  usuario: Usuario | undefined;
+  constructor() { }
 
-  constructor(private http: HttpClient) { }
+    usuario: Usuario | undefined; 
 
-  login(loginData: Login): Observable<ResLogin> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<ResLogin>('http://localhost:4000/login', loginData, { headers });
-  }
+    async login(loginData:Login){
+      const res = await fetch('http://localhost:4000/login',{
+        method: 'POST',
+        headers: {
+          'Content-type':'application/json'
+        },
+        body: JSON.stringify(loginData)
+      })
+      if(res.status !== 200) return;
+      const resJson:ResLogin = await res.json();
+      if(!resJson.token) return;
+      this.usuario = {
+        username : loginData.username,
+        token: resJson.token,
+        isAdmin : true
+      }
+      return resJson;
+    }
+  
 
-  register(loginData: Login): Observable<ResLogin> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<ResLogin>('http://localhost:4000/register', loginData, { headers });
-  }
-
-  setUsuario(usuario: Usuario) {
-    this.usuario = usuario;
-  }
-
-  getUsuario(): Usuario | undefined {
-    return this.usuario;
-  }
+    async register(registerData: Register) {
+      const res = await fetch('http://localhost:4000/register', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(registerData)
+      });
+    
+      if (res.status !== 201) return;
+      return res;
+}
 }

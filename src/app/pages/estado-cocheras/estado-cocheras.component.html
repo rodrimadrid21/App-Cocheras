@@ -4,33 +4,22 @@
     <table>
         <thead>
         <tr>
-            <td>{{ headertable.t1 }}</td>
-            <td>{{ headertable.t2 }}</td>
-            <td>{{ headertable.t3 }}</td>
-            <td>{{ headertable.t4 }}</td>
+            <td>N°</td>
+            <td>Disponibilidad</td>
+            <td>Ingreso</td>
+            <td>Acciones</td>
         </tr>
         </thead>
         <tbody>
             <!-- No se debe usar <tr> aquí; las filas se generan dentro del bucle -->
-            @for (cochera of cocheras; track $index) {
+            @for (cochera of dataCocherasService.cocheras; track $index) {
                 <tr>
-                    <td>{{ cochera.nro }}</td>
-                    @if(cochera.dispo==="Disponible"){
-                        <td id="dispo">{{ cochera.dispo }}</td>
-                    } @else {
-                        <td id="nodispo">{{ cochera.nodispo }}</td>
-                    }
-                    <td>{{ cochera.ingreso }}</td>
-                    <td id="accion">
-                        @if(cochera.dispo === "Disponible"){
-                            <button class="deshabilitado" (click)="toggleCochera($index)">Deshabilitar</button>
-                        } @else {
-                            <button class="habilitado" (click)="toggleCochera($index)">Habilitar</button>
-    
-                        }
-                        @if ((isAdmin)){
-                        <button class="botonelim" (click)="alert($index)">✖</button>
-                        }
+                    <td>{{ cochera.id }}</td>
+                    <td [ngClass]="{'disponible': !cochera.deshabilitada, 'ocupado': cochera.deshabilitada}">{{ !cochera.deshabilitada ? 'Disponible' : 'Ocupado' }}</td>
+                    <td>{{cochera.descripcion}}</td>
+                    <td>
+                        <button class="habilitado" (click) = "toggleDisponibilidad($index)">Modificar</button>
+                        <button class="botonelim" (click) = "confirmDeleteCochera($index)">✖</button>
                     </td>
                 </tr>
             }
@@ -38,7 +27,7 @@
                 <tr>
                     <td class="vacio">
                         No hay cocheras disponibles.
-                        <button class="mas1" (click)="Funcionsuma()">+</button>
+                        <button class="mas1" (click)="agregarCochera()">+</button>
                     </td>
                 </tr>
             }
@@ -46,8 +35,7 @@
     </table>
 
     <div class="buttons-container">
-        <button class="botonaccmas" (click)="Funcionsuma()">Agregar Cochera</button>
-        <button class="botonborrartodo" (click)="Funcionborrar()">Borrar todo</button>
+        <button class="botonaccmas" (click)="agregarCochera()">Agregar Cochera</button>
         <button class="bye"[routerLink]="['/login']">Cerrar sesión</button>
     </div>
 </body>

@@ -1,85 +1,96 @@
-
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { iCochera } from '../interfaces/cochera';
 import Swal from 'sweetalert2';
+import { DataAuthService } from './data-auth.service';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataCocherasService {
   cocheras: iCochera[] = [];
-  
-  headertable = {
-    t1: "Nro",
-    t2: "Disponibilidad",
-    t3: "Ingreso",
-    t4: "Acción"
-  };
+  authService = inject(DataAuthService);
 
-  isAdmin: boolean = true;
+  router= inject(Router);
 
-  toggleCochera(index: number) {
-  this.cocheras[index].dispo = this.cocheras[index].dispo === 'Ocupado' ? 'Disponible' : 'Ocupado';
+  constructor() {
+    this.getCocheras()
   }
 
-  // Método para obtener las cocheras
-  getCocheras() {
-    return this.cocheras;
-  }
-
-  Funcionborrar(){
-    this.cocheras = []
-  };
-
-  deshabilitarCochera(index:number){
-    this.cocheras[index].dispo = "Ocupado";
-  }
-
-  habilitarCochera(index:number){
-    this.cocheras[index].dispo = "Disponible";
-  }
-
-  funcionBorrar1(indice: number) {
-    this.cocheras.splice(indice, 1)
-  };
-  
-//ultimo numero
-  ultnro = this.cocheras.length > 0 ? this.cocheras[this.cocheras.length - 1].nro : 0;
-
-  Funcionsuma(){
-    this.cocheras.push({
-      nro: this.ultnro+1,
-      dispo: "Disponible",
-      nodispo: "Ocupado",
-      ingreso: '-',
-      acc: '-'
+  async getCocheras(){
+    const res = await fetch('http://localhost:4000/cocheras',{
+      headers: {
+        authorization:'Bearer '+this.authService.usuario?.token
+      },
     })
-    this.ultnro ++;
+    if(res.status !== 200) return;
+    const resJson:iCochera[] = await res.json();
+    this.cocheras = resJson;
   }
 
-  alert(index: number) {
+  ultimoNumero = this.cocheras[this.cocheras.length - 1]?.id || 0;
+  agregarCochera() {
+    this.cocheras.push({
+      id: this.ultimoNumero + 1,
+      descripcion: "-",
+      deshabilitada: 0,
+      eliminada: 0
+    });
+    this.ultimoNumero++; 
+  }
+
+  toggleDisponibilidad(index: number) {
+    if (this.cocheras[index].deshabilitada === 1) {
+      this.cocheras[index].deshabilitada = 0;
+    } else {
+      this.cocheras[index].deshabilitada = 1;
+    }
+  }
+
+  confirmDeleteCochera(index: number) {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Si eliminas esta cochera, no podrás revertirlo.",
-      icon: "warning",
+      title: '¿Estás seguro?',
+      text: "Esta cochera será eliminada permanentemente.",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, estoy seguro",
-      cancelButtonText: "Cancelar"
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.funcionBorrar1(index);
-        Swal.fire({
-          title: "La cochera fue eliminada.",
-          icon: "success"
-        });
+        this.borrarCochera(index);
+        Swal.fire('¡Eliminado!', 'La cochera ha sido eliminada exitosamente.', 'success');
       }
     });
   }
 
+  borrarCochera(index: number) {
+    this.cocheras.splice(index, 1); 
+  }
 
-  
+  confirmLogout(event: Event) {
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '¡Cerrando sesión!',
+          text: 'Has cerrado sesión exitosamente.',
+          icon: 'success'
+        }).then(() => {
+          this.router.navigate(['/login']);
+        });
+      }
+    });
+  }
 }
-
-
