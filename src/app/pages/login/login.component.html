@@ -4,18 +4,15 @@
         <h2>Gestioná tu estacionamiento de manera sencilla</h2>
         <div class="formulario">
             <h3>¡Bienvenido!</h3>
-            <form #loginForm = "ngForm" (ngSubmit)="login(loginForm)"class="form" >
+            <form>
                 <div class="form">
-                    <input type="text" id="usuario" placeholder="Usuario" name="username" ngModel required>
+                    <input type="text" id="usuario" placeholder="Usuario" required>
                 </div>
                 <div class="form">
-                    <input type="password" id="contraseña" placeholder="Contraseña" name="password" ngModel required>
+                    <input type="text" id="contraseña" placeholder="Contraseña" required>
                 </div>
-                <button [disabled]="loginForm.invalid" type="submit" id="boton1">Iniciar sesión</button><!--linkeado con logincomponent.ts-->
+                <button (click)="login()" id="boton1">Iniciar sesión</button><!--linkeado con logincomponent.ts-->
                 <button id="boton2" type="button" (click)="register()">Registrarse</button>
-                @if (errorLogin){
-                    <p> Error en login</p>
-                }
             </form>
         </div>
     </main>

@@ -1,40 +1,58 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterModule, Router} from '@angular/router';
-import { CommonModule, NgClass } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { DataCocherasService } from '../../services/data-cocheras.service';
-import { DataAuthService } from '../../services/data-auth.service';
 
 @Component({
   selector: 'app-estado-cocheras',
   standalone: true,
-  imports: [RouterModule, NgClass, CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './estado-cocheras.component.html',
   styleUrl: './estado-cocheras.component.scss'
 })
 export class EstadoCocherasComponent {
   // Inyecta el servicio
-  authService = inject(DataAuthService);
-  titulo: string = "Parking App";
+  dataCocheraService = inject(DataCocherasService)
 
-  isAdmin: boolean = true;
-
-  dataCocherasService = inject(DataCocherasService);
-
-  constructor(private router: Router) {} 
-  agregarCochera() {
-    this.dataCocherasService.agregarCochera();
+  // Getters para acceder a los datos y métodos del servicio
+  get headertable() {
+    return this.dataCocheraService.headertable;
   }
 
-  toggleDisponibilidad(index: number) {
-    this.dataCocherasService.toggleDisponibilidad(index);
+  get cocheras() {
+    return this.dataCocheraService.cocheras;
   }
 
-  confirmDeleteCochera(index: number) {
-    this.dataCocherasService.confirmDeleteCochera(index);
+  get isAdmin() {
+    return this.dataCocheraService.isAdmin;
+  }
+  
+  // Método para alternar el estado de la cochera
+  toggleCochera(index: number) {
+    this.dataCocheraService.toggleCochera(index);
   }
 
-  confirmLogout(event: Event) {
-    this.dataCocherasService.confirmLogout(event);
+  // Métodos para llamar a las funciones del servicio
+  Funcionsuma() {
+    this.dataCocheraService.Funcionsuma();
   }
+
+  habilitarCochera(index:number) {
+    this.dataCocheraService.habilitarCochera(index)
+  }
+
+  deshabilitarCochera(index:number) {
+    this.dataCocheraService.deshabilitarCochera(index)
+  }
+
+  alert(index: number) {
+    this.dataCocheraService.alert(index);
+  }
+
+  Funcionborrar() {
+    this.dataCocheraService.Funcionborrar();
+  }
+
+  
 
 }
