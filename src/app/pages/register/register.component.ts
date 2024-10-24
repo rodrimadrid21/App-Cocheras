@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
   selector: 'app-register-cochera',
   standalone: true,
   imports: [RouterModule, FormsModule],
-  templateUrl: './register-cochera.component.html',
-  styleUrl: './register-cochera.component.scss'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
 export class RegisterCocheraComponent {
   errorRegister = false;

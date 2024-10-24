@@ -26,7 +26,7 @@ export const routes: Routes = [//rutas q agregamos
         canActivate: [soloPublicoGuard]
     },
     {
-        path: "register-cochera",
+        path: "register",
         component:  RegisterCocheraComponent,
         canActivate: [soloPublicoGuard]
     },
@@ -35,15 +35,15 @@ export const routes: Routes = [//rutas q agregamos
         component: DashboardContentComponent,
         canActivate: [soloLogeadoGuard],
         children: [
-        {
-            path: "estado-cocheras",
-            component: EstadoCocherasComponent
-        },
-        {
-            path: "reportes",
-            component: ReportesComponent,
-            canActivate: [soloAdminGuard]
-        }
+            {
+                path: "estado-cocheras",
+                component: EstadoCocherasComponent
+            },
+            {
+                path: "reportes",
+                component: ReportesComponent,
+                canActivate: [soloAdminGuard]
+            }
     ]
     },
     {
