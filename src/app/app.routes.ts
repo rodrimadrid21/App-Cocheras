@@ -2,12 +2,12 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { EstadoCocherasComponent } from './pages/estado-cocheras/estado-cocheras.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { RegisterCocheraComponent } from './pages/register-cochera/register-cochera.component';
 import { soloLogeadoGuard } from './guards/solo-logeado.guard';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { soloAdminGuard } from './guards/solo-admin.guard';
 import { soloPublicoGuard } from './guards/solo-publico.guard';
 import { DashboardContentComponent } from './pages/dashboard-content/dashboard-content.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [//rutas q agregamos
         //{//redireccion
@@ -27,7 +27,7 @@ export const routes: Routes = [//rutas q agregamos
     },
     {
         path: "register",
-        component:  RegisterCocheraComponent,
+        component:  RegisterComponent,
         canActivate: [soloPublicoGuard]
     },
     {
@@ -51,8 +51,8 @@ export const routes: Routes = [//rutas q agregamos
         component:NotFoundComponent
     },
     {
-        path: "**",
+        path: "",
         redirectTo: "not-found",
         pathMatch: "full"
-    }//si es cualquier cosa te redirige al 404
+    }//si es cualquier cosa te redirige al 404
 ];

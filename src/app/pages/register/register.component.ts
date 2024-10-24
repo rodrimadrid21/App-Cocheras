@@ -5,13 +5,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-register-cochera',
+  selector: 'app-register',
   standalone: true,
-  imports: [RouterModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterCocheraComponent {
+export class RegisterComponent {
   errorRegister = false;
   authService = inject(DataAuthService)
   router = inject(Router)
@@ -20,14 +20,34 @@ export class RegisterCocheraComponent {
     const {username, nombre, apellido, password} = registerForm.value;
     const registerData = {username, nombre, apellido, password};
     
-    const res = await this.authService.register(registerData)//espera la respuesta del registro
+    const res = await this.authService.register(registerData)
 
     if(res?.statusText === "Created") {
       this.router.navigate(['/login']).then(() => {
         Swal.fire("Registro exitoso", "", "success");
       })
-    } else this.errorRegister = true;
-  }
+    } else this.errorRegister = true;
+  }
+}
+
+
+//export class RegisterComponent {
+//  errorRegister = false;
+//  authService = inject(DataAuthService)
+//  router = inject(Router)
+//
+//  async register(registerForm: NgForm){
+//    const {username, nombre, apellido, password} = registerForm.value;
+//    const registerData = {username, nombre, apellido, password};
+//    
+//    const res = await this.authService.register(registerData)//espera la respuesta del registro
+//
+//    if(res?.statusText === "Created") {
+//      this.router.navigate(['/login']).then(() => {
+//        Swal.fire("Registro exitoso", "", "success");
+//      })
+//    } else this.errorRegister = true;
+//  }
 
   //async register(registerForm: NgForm) {
   //  const { username, email, password, confirmPassword } = registerForm.value;
@@ -62,5 +82,5 @@ export class RegisterCocheraComponent {
   //  }
   //}
   //
-}
+
 
