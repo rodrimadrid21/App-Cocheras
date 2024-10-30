@@ -1,11 +1,18 @@
 <header>
-    <h1>PARKING APP</h1>
+    <h1 [routerLink]="['estado-cocheras']" routerLinkActive="router-link-active">PARKING APP</h1>
     <nav>
-        <a [routerLink]="['/dashboard/estado-cocheras']" routerLinkActive="router-link-active">Estado Cocheras</a>
-        <a [routerLink]="['/dashboard/reportes']" routerLinkActive="router-link-active">Reportes</a>
-        <a [routerLink]="['/precios']" routerLinkActive="link-activo" >Precios</a>
-        <a>Usuario</a>
-    <a>Usuario</a>
+        <a [routerLink]="['estado-cocheras']" routerLinkActive="router-link-active">Estado Cocheras</a>
+        <a [routerLink]="['precios']" routerLinkActive="outer-link-active">Precios</a>
+        <a [routerLink]="['reportes']" routerLinkActive="router-link-active">Reportes</a>
+        <div class="usuario" (click)="toggleMenu()">
+            <a class="boton">Usuario</a>
+            @if(menu){
+                <div class="menu">
+                    <button (click)="cerrarSesion()">Cerrar sesión</button>
+                </div>
+            }
+            
+        </div>
     </nav>
 </header>
 <router-outlet></router-outlet>

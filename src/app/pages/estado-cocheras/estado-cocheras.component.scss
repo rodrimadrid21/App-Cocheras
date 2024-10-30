@@ -3,140 +3,190 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;/*va horizontal por el column*/
-    min-height: 100vh;
+    min-height: 89vh;
     margin: 0;
     padding: 0;
     background-color: rgb(11, 11, 11);
     background-size: cover;
     overflow-y: hidden;/*elimina el scroll vertical*/
 }
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 table {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin-top: 4rem;
+    width: 65%;
+    margin-top: 3rem;
 }
 
 thead {
+    display: flex;
+    flex-direction: row;
     background-color: #053f4e;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
 
-thead tr {
+thead td {
+    text-transform: uppercase;
     color: white;
     display: flex;
     flex-direction: row;
     width: 100%;
     font-family:'Arial';
     font-weight: bold;
+    padding: 10px;
+    font-size: 20px;
 }
-
 tbody {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(0, 0, 0, 0.774);
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
-    height: 26rem;
+    height: 20rem;
     overflow: auto;
     color: white;
     font-family:'Arial';
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-top: 10px;
 }
-
 tbody tr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-
+tbody td {
+    font-size: 21px;
+    text-transform: uppercase;
+    padding:3px;
+}
 td {
     font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     flex: 1;/**/
 }
-#dispo {
-    background-color: rgb(0, 94, 0);
-    border-radius: 20px;
+.acciones {
+    display: flex;
+    white-space: nowrap;
 }
-#nodispo {
-    background-color: rgb(89, 0, 0);
-    border-radius: 20px;
+.disponibilidad {
+    border: none;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+}
+.disponibilidad0 {
+    border: none;
+    background-color: transparent;
+    color: rgb(61, 61, 61);
+    text-transform: uppercase;
+}
+.disponibilidad1 {
+    border: none;
+    background-color: transparent;
+    color: rgba(48, 192, 120, 0.808);
+    text-transform: uppercase;
+}
+.dispo {
+    margin: 0;
+    padding: 6px 10px;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px;
+    background-color: transparent;
+    color: white;
+    border: 0.2px solid rgb(148, 148, 148);
+    
+}
+.nodispo {
+    background-color: transparent;
+    padding: 1px 10px;
+    border: 1px solid rgb(187, 20, 20);
+    text-transform: uppercase;
+    font-size: 23px;
+    font-weight: 100;
+}
+
+.cobrar {
+    text-transform: uppercase;
+    border: none;
+    font-size: 18px;
+    padding: 6px 71px;
+    background-color: transparent;
+    color: rgba(48, 192, 103, 0.808);
+    border: 1px solid rgba(76, 202, 139, 0.76);
+}
+.cobrar:hover {
+    text-decoration: underline;
+}
+.nodispo:hover {
+    text-decoration: underline;
+}
+.dispo:hover {
+    text-decoration: underline;
+}
+.modif:hover {
+    text-decoration: underline;
+}
+.botonelim:hover {
+    text-decoration: underline;
 }
 button {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    padding: 8px 25px;
-    border-radius: 12px;
+    padding: 8px 10px;
+    border-radius: 9px;
     border-width: 1px;
     margin: 5px;
     cursor: pointer;
     font-family:'Arial';
+    font-weight: bold;
+    font-size: 20px;
 }
+
 .acciones {
     display: flex;
-    gap: 15px
+    gap: 5px;
+    padding: 0;
 }
-.deshabilitado {
+.modif {
     margin: 0;
-    background-color: white;
-    font-size: 20px;
+    padding: 6px 12px;
+    font-size: 17px;
     font-weight: bold;
-    color: black;
-    padding: 13px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px;
+    background-color: transparent;
+    color: white;
+    border: 0.2px solid rgb(150, 150, 150);
 }
-.deshabilitado:hover {
-    background-color: #c4c4c4;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-}
-.habilitado {
-    margin: 0;
-    background-color: white;
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
-    padding: 13px 37px;
-}
-.habilitado:hover {
-    background-color: #c4c4c4;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-}
+
 .botonelim {
-    margin-left: 5px;
     font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 25px;
-    font-size: 20px;
-    background-color: white;
-    border: none;
-    color: #ff0000;
-}
-.botonelim:hover {
-    background-color: #c4c4c4;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    padding: 4px 17px;
+    background-color: transparent;
+    border: 1px solid #c21616;
+    color: #f74444;
 }
 
 .botonaccmas {
-    padding: 20px 30px;
+    padding: 10px 0px;
     border-radius: 12px;
     font-size: 20px;
-    background-color: #030303ec;
+    background-color: #053f4e;
     color: white;
+    width: 100%;
 }
-
-.buttons-container {
-    display: flex;
-    justify-content:center;
-    flex-direction: row;
-    width: 50%;
-    gap: 20px;
+.botonaccmas:hover {
+    text-decoration: underline;
+    border: 1px solid white;
 }
 
 .botonborrartodo {
@@ -161,11 +211,11 @@ button {
     display: flex;
     flex-direction: column;
     font-size: 30px;
-    margin-top: 7rem;
+    margin-top: 5rem;
 }
 .mas1 {
-        font-size: 40px;
-        padding-inline: 25px;
+        font-size: 30px;
+        padding-inline: 20px;
         border-width: 2px;
         margin-top: 2rem;
         margin-bottom: 2rem;

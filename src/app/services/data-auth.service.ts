@@ -10,63 +10,74 @@ import { environment } from '../../environments/environment.development';
 export class DataAuthService {
 
   constructor() {
+
     const token = this.getToken();
+
     if(token){
-      if(!this.usuario) this.usuario = {
+      if(!this.usuario){ 
+        this.usuario = {
         username: '',
         token: token,
         isAdmin: false
-      }
-      else this.usuario!.token = token;
+      };
+    } else { 
+      this.usuario!.token = token;
     }
-   }
+  } else {
+    this.clearToken();  // Si no hay token válido, limpiar el almacenamiento
+  }
+}
   
   usuario: Usuario | undefined;
 
   async login(loginData: Login) {
-    const res = await fetch(environment.API_URL+'login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginData)
-    });
-  
-      // Si la respuesta es exitosa (código 200)
-      if (res.status !== 200) return;
-  
-      const resJson: ResLogin = await res.json();
-  
-      // Si se recibe un token, considera el login exitoso
-      if (!resJson.token) return;
-  
-      this.usuario = {
-          username: loginData.username,
-          token: resJson.token,
-          isAdmin: false
-      };
-
-      localStorage.setItem("authToken", resJson.token);
-  
-      const userDetailsRes = await fetch(environment.API_URL+`usuarios/${encodeURIComponent(loginData.username)}`, {
+    try {
+        const res = await fetch(`${environment.API_URL}Authenticate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        });
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error("Error en el inicio de sesión:", errorText);
+            return;
+        }
+        const token = await res.text();
+        if (!token) {
+            console.error("No se recibió un token de autenticación.");
+            return;
+        }
+        this.usuario = {
+            username: loginData.username,
+            token: token,
+            isAdmin: false
+        };
+        localStorage.setItem("authToken", token);
+        const userDetailsRes = await fetch(`${environment.API_URL}User/by-username/${encodeURIComponent(loginData.username)}`, {
           method: 'GET',
           headers: {
-              'Authorization': `Bearer ${resJson.token}`,
+              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
           }
-      });
-  
-      if (userDetailsRes.status !== 200) return;
-  
-      const userDetailsResJson = await userDetailsRes.json();
-  
-      this.usuario.isAdmin = userDetailsResJson.isAdmin;
-  
-      return userDetailsRes;
-    }
+      });     
+        if (!userDetailsRes.ok) {
+            const errorDetails = await userDetailsRes.text();
+            console.error("Error en la solicitud de detalles del usuario:", errorDetails);
+            return;
+        }
+        const userDetailsResJson = await userDetailsRes.json();
+        this.usuario.isAdmin = userDetailsResJson.isAdmin;
+        return userDetailsRes;
+    } catch (error) {
+        console.error("Error en el proceso de inicio de sesión:", error);
+        return null;
+      }
+  }
 
     async register(registerData: Register) {
-      const res = await fetch(environment.API_URL+'register', {
+      const res = await fetch(environment.API_URL+'User/register', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -74,31 +85,9 @@ export class DataAuthService {
           body: JSON.stringify(registerData)
       });
   
-      if (res.status !== 201) return;
+      if (res.status !== 200) return;
       return res;
     }
-
-//async register(registerData: Register) {
-//  try {
-//    const res = await fetch(environment.API_URL+'register-cochera', {
-//      method: 'POST',
-//      headers: {
-//        'Content-type': 'application/json'
-//      },
-//      body: JSON.stringify(registerData)
-//    });
-//    
-//    if (res.status !== 201) {
-//      const errorData = await res.json(); // Captura el cuerpo de la respuesta con más detalles
-//      throw new Error(errorData.message || 'Error en el registro');
-//    }
-//    
-//    return res;
-//  } catch (error) {
-//    console.error('Error en el servicio de registro:', error);
-//    throw error; // Vuelve a lanzar el error para manejarlo en el componente
-//  }
-//}
 
   setUsuario(usuario: Usuario) {
     this.usuario = usuario;

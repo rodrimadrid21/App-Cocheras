@@ -4,8 +4,8 @@ export interface Estacionamiento {
     horaIngreso: string,
     horaEgreso: string,
     costo: number,
-    idUsuarioIngreso: string,
-    idUsuarioEgreso: string,
+    idUsuarioIngreso: number,
+    idUsuarioEgreso: number,
     idCochera: number,
     eliminado: boolean | null
 }

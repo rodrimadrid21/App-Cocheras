@@ -10,9 +10,9 @@
             <div class="buttonContainer">
                 <button [disabled]="registerForm.invalid" class="boton-resaltado" type="submit">Registrarse</button>
             </div>
-            @if(errorRegister) {
-                <p>Error de register</p>
-            }
         </form>
+        @if(errorRegister) {
+            <h3 id="error">Error de register</h3>
+        }
     </main>
 </body>

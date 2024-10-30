@@ -1,47 +1,86 @@
 
 <!--display:grid,flexbox, grid-templated-column: 50px, 1fr, 1fr, 1,fr. margin:auto, justify:center,-->
 <body>
+    <main>
     <table>
         <thead>
-        <tr>
             <td>Nro</td>
             <td>Disponibilidad</td>
             <td>Ingreso</td>
             <td>Acciones</td>
-        </tr>
         </thead>
         <tbody>
             <!-- No se debe usar <tr> aquí; las filas se generan dentro del bucle -->
             @for (cochera of dataCocherasService.cocheras; track $index) {
                 <tr>
-                    <td>{{ cochera.id }}</td>
                     <td>
-                        @if (cochera.deshabilitada) {
-                            <button class="deshabilitada">
-                                Deshabilitada
-                            </button>
-                        } @else if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
-                            <button (click)="cerrarEstacionamiento(cochera)">
-                                {{ cochera.estacionamiento?.patente }}
-                            </button>
-                        } @else {
-                            <button class="disponible" (click)="abrirEstacionamiento(cochera.id)">
-                                Disponible
-                            </button>
+                        @if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
+                            <div class="disponibilidad1">
+                                {{ cochera.id }}
+                            </div>
+                        }
+                        @else if (cochera.deshabilitada) {
+                            <div class="disponibilidad0">
+                                {{ cochera.id }}
+                            </div>
+                        }
+                        @else {
+                            <div class="disponibilidad">
+                                {{ cochera.id }}
+                            </div>
                         }
                     </td>
-                    <td>{{ cochera.descripcion }}</td>
+                    <td>
+                        @if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
+                            <div class="disponibilidad1">
+                                {{ cochera.estacionamiento?.patente }}
+                            </div>
+                        } 
+                        <!-- Si hay hora de egreso, mostrar como deshabilitada -->
+                        @else if (cochera.deshabilitada) {
+                            <div class="disponibilidad0">
+                                Deshabilitada
+                            </div>
+                        } 
+                        <!-- Si está disponible, permite abrir el estacionamiento ingresando patente -->
+                        @else {
+                            <div class="disponibilidad">
+                                Habilitada
+                            </div>
+                        }
+                    </td>
+                    <td class="ingreso">
+                        @if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
+                            <div class="disponibilidad1">
+                                {{ cochera.descripcion }}
+                            </div>
+                        }
+                        @else if (cochera.deshabilitada) {
+                            <div class="disponibilidad0">
+                                {{ cochera.descripcion }}
+                            </div>
+                        }
+                        @else if(!cochera.deshabilitada){
+                            <div class="disponibilidad">
+                                {{ cochera.descripcion }}
+                            </div>
+                        }
+                    </td>
                     <td class="acciones">
                         @if(!cochera.estacionamiento?.patente){
                             @if(!cochera.deshabilitada){
-                                <button (click)="preguntarDeshabilitarCochera(cochera.id)">Deshabilitar</button>
+                                <button class="modif" (click) ="abrirEstacionamiento(cochera.id)">Agregar Patente</button>
+                                <button class="nodispo" (click)="preguntarDeshabilitarCochera(cochera.id)">⛔</button>
                             } @else {
-                                <button (click)="preguntarHabilitarCochera(cochera.id)">Habilitar</button>
+                                <button class="dispo" (click)="preguntarHabilitarCochera(cochera.id)">Habilitar cochera</button>
+                                <button class="botonelim" (click)="preguntarBorrarCochera(cochera.id)">✖</button>
 
                             }
-                            @if (isAdmin){
-                            <button class="botonelim" (click)="preguntarBorrarCochera(cochera.id)">✖</button>
-                            }
+                        }
+                        @if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
+                            <button class="cobrar" (click)="cerrarEstacionamiento(cochera)">
+                                Cobrar
+                            </button>
                         }
                     </td>
                 </tr>
@@ -55,11 +94,7 @@
                 </tr>
             }
         </tbody>
-    </table>
-
-    <div class="buttons-container">
         <button class="botonaccmas" (click)="preguntarAgregarCochera()">Agregar Cochera</button>
-        <button class="botonborrartodo" (click)="preguntarBorrarTodo()">Borrar todo</button>
-    </div>
-    <button class="bye"[routerLink]="['/login']">Cerrar sesión</button>
+    </table>
+</main>
 </body>

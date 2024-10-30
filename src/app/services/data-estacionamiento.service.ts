@@ -11,11 +11,12 @@ export class DataEstacionamientosService {
 
   constructor() {
     this.getUltimasTransacciones();
-   }
+  }
 
   async getUltimasTransacciones(cantidad = 5) {
     if (!this.dataCocheraService.estacionamientos || this.dataCocheraService.estacionamientos.length === 0) {
       console.error("No hay estacionamientos disponibles");
+      return;
     }
 
     const transaccionesFiltradas = this.dataCocheraService.estacionamientos.filter(estacionamiento => 
@@ -27,5 +28,6 @@ export class DataEstacionamientosService {
         .slice(0, cantidad);
 
     this.ultimasTransacciones = ultimasTransacciones;
+    console.log(this.ultimasTransacciones)
   }
 }

@@ -2,10 +2,12 @@ header {
     display: flex;
     justify-content: space-around;
     background-color: #032831;
-    gap: 20rem;
+    gap: 10rem;
+    height: 80px;
 }
 h1 {
     font-size: 45px;
+    white-space: nowrap;
     color: #006781;
     text-shadow: 1px 1px 0px white, /* Sombras alrededor del texto para simular un borde */
     -1px 1px 0px white,
@@ -16,14 +18,16 @@ h1 {
     margin-left: 10rem;
     padding-top: 1rem;
     padding-bottom: 1.3rem;
+    cursor: pointer;
 }
 nav {
     display: flex;
+    white-space: nowrap;
     font-family:Arial;
-    font-size: 28px;
+    font-size: 23px;
     font-weight: bold;
     gap: 20px;
-    padding-top: 1.5rem;
+    padding-top: 1.8rem;
     padding-bottom: 1.3rem;
     margin-right: 10rem;
 }
@@ -35,4 +39,7 @@ a {
 a:hover {
     text-decoration: underline;
     color: #00b1a8;
+}
+.boton {
+    cursor: pointer;
 }

@@ -90,3 +90,13 @@ button:hover {
     background-color: #004F54;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
 }
+#error {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: arial;
+    font-size: 40px;
+    color: red;
+    font-weight: bold;
+    background-color: black;
+}

@@ -16,7 +16,7 @@ main{
     justify-content: center;
 }
 table {
-    width: 60%;
+    width: 50%;
     margin-top: 3rem;
 }
 thead {
@@ -26,7 +26,6 @@ thead {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
-
 thead td {
     text-transform: uppercase;
     color: white;
@@ -36,6 +35,7 @@ thead td {
     font-family:'Arial';
     font-weight: bold;
     font-size: 20px;
+    padding: 10px;
 }
 tbody {
     display: flex;
@@ -47,24 +47,76 @@ tbody {
     overflow: auto;
     color: white;
     font-family:'Arial';
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-top: 10px;
 }
-tbody td {
-    font-size: 21px;
-    text-transform: uppercase;
-}
+
 tbody tr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
+tbody td {
+    font-size: 21px;
+    text-transform: uppercase;
+    padding:3px;
+}
 td {
     font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     flex: 1;/**/
+}
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 18px;
+    border-radius: 12px;
+    margin: 5px;
+    cursor: pointer;
+    font-family:'Arial';
+    border-radius: 9px;
+    font-size: 25px;
+    color: white;
+    background-color: #577981;
+}
+.edit{
+    padding: 8px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px;
+    background-color: transparent;
+    color: white;
+    border: 0.2px solid rgb(148, 148, 148);
+}
+.edit:hover {
+    text-decoration: underline;
+}
+.elim {
+    background-color: transparent;
+    padding: 4.5px 10px;
+    border: 1px solid rgb(187, 20, 20);
+    text-transform: uppercase;
+    font-size: 23px;
+    font-weight: 100;
+    color: #f74444;
+}
+.elim:hover {
+    text-decoration: underline;
+}
+.precio {
+    width: 100%;
+    padding: 10px 0px;
+    border-radius: 12px;
+    font-size: 20px;
+    background-color: #053f4e;
+    color: white;
+}
+.precio:hover {
+    text-decoration: underline;
+    border: 1px solid white;
 }

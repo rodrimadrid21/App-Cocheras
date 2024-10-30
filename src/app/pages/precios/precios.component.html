@@ -1,0 +1,22 @@
+<body>
+<main>
+    <table>
+        <thead>
+                <td>Tiempo</td>
+                <td>Costo</td>
+                <td>Acciones</td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let precio of precios">
+                <td>{{ precio.descripcion }}</td>
+                <td>{{ precio.valor }}</td>
+                <td>
+                    <button class="edit" (click)="editarPrecio(precio)">Editar</button>
+                    <button class="elim" (click)="borrarPrecio(precio)">✖</button>
+                </td>
+            </tr>
+        </tbody>
+        <button class="precio" (click)="agregarPrecio()">Agregar Precio</button>
+    </table>
+</main>
+</body>

@@ -25,10 +25,8 @@ export class DataCocherasService {
     this.asociarEstacionamientosConCocheras();
   }
 
-
-  // Método para obtener las cocheras
   async getCocheras(){
-    const res = await fetch(environment.API_URL+'cocheras',{
+    const res = await fetch(environment.API_URL+'Cochera',{
       headers: {
         authorization:'Bearer '+localStorage.getItem("authToken")
       },
@@ -39,7 +37,7 @@ export class DataCocherasService {
   }
 
   async getEstacionamientos() {
-    const res = await fetch(environment.API_URL+'estacionamientos', {
+    const res = await fetch(environment.API_URL+'Estacionamiento', {
       headers: {
         authorization: 'Bearer ' + localStorage.getItem("authToken")
       },
@@ -62,7 +60,7 @@ export class DataCocherasService {
 
   async agregarCochera(nombreCochera:string){
     const cochera = {"descripcion" : nombreCochera};
-    const res = await fetch(environment.API_URL+'dashboard/cocheras',{
+    const res = await fetch(environment.API_URL+'Cochera',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,8 +76,8 @@ export class DataCocherasService {
     };
   }
 
-  async borrarFila(index:number){
-    const res = await fetch(environment.API_URL+`/dashboard/cocheras/${index}`,{
+  async borrarFila(id:number){
+    const res = await fetch(environment.API_URL+`Cochera/${id}`,{
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -95,7 +93,7 @@ export class DataCocherasService {
   }
   
   async borrarTodo() {
-    const res = await fetch(environment.API_URL+'/dashboard/cocheras', {
+    const res = await fetch(environment.API_URL+'Cochera', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -111,11 +109,16 @@ export class DataCocherasService {
   }
 
   async deshabilitarCochera(idCochera:number){
-    const res = await fetch(environment.API_URL+'/dashboard/cocheras/'+idCochera+'/disable', {
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error("Token no disponible");
+      return;
+    }
+    const res = await fetch(environment.API_URL+`Cochera/disable/${idCochera}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'Bearer'+localStorage.getItem("authToken")
+        authorization: 'Bearer'+token
       },
     })
     if(res.status === 200) {
@@ -127,7 +130,7 @@ export class DataCocherasService {
   }
 
   async habilitarCochera(idCochera:number){
-    const res = await fetch(environment.API_URL+'/dashboard/cocheras/'+idCochera+'/enable', {
+    const res = await fetch(environment.API_URL+`Cochera/enable/${idCochera}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -142,47 +145,31 @@ export class DataCocherasService {
     };
   }
 
-  //alert(index: number) {
-  //  Swal.fire({
-  //    title: "¿Estás seguro?",
-  //    text: "Si eliminas esta cochera, no podrás revertirlo.",
-  //    icon: "warning",
-  //    showCancelButton: true,
-  //    confirmButtonColor: "#3085d6",
-  //    cancelButtonColor: "#d33",
-  //    confirmButtonText: "Sí, estoy seguro",
-  //    cancelButtonText: "Cancelar"
-  //  }).then((result) => {
-  //    if (result.isConfirmed) {
-  //      this.funcionBorrar1(index);
-  //      Swal.fire({
-  //        title: "La cochera fue eliminada.",
-  //        icon: "success"
-  //      });
-  //    }
-  //  });
-  //}
-
   async abrirEstacionamiento(patente: string, idUsuarioIngreso: string, idCochera: number) {
-    const body = {patente, idUsuarioIngreso, idCochera};
-    const res = await fetch(environment.API_URL+'estacionamientos/abrir',{
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error("Token no disponible");
+      return;
+    }
+    const body = { patente, idUsuarioIngreso, idCochera };
+    const res = await fetch(`${environment.API_URL}Estacionamiento/abrir`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization:'Bearer '+ localStorage.getItem("authToken")
+        authorization: 'Bearer ' + token
       },
       body: JSON.stringify(body)
-    })
-    if(res.status !== 200) {
-      console.log("Error en abrir estacionamiento")
+    });
+    if (res.status !== 200) {
+      console.log("Error en abrir estacionamiento");
     } else {
-      console.log("Creacion de estacionamiento exitoso")
-      this.loadData()
-    };
-  }  
+      console.log("Creación de estacionamiento exitoso");
+      this.loadData();
+    }
+  } 
   async cerrarEstacionamiento(patente: string, idUsuarioEgreso: string) {
     const body = {patente, idUsuarioEgreso};
-    const res = await fetch(environment.API_URL+'estacionamientos/cerrar',{
+    const res = await fetch(environment.API_URL+'Estacionamiento/cerrar',{
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -196,7 +183,31 @@ export class DataCocherasService {
       console.log("Cerrado del estacionamiento exitoso")
       console.log(res)
       this.loadData();
-    };    
+    };   
+  }
+
+  async deleteEstacionamiento(id: number): Promise<void> {
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error("Token no disponible");
+      return;
+    }
+
+    return fetch(`${environment.API_URL}Estacionamiento/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token  // Se incluye el token para la autenticación
+      }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error("Error al eliminar el estacionamiento.");
+      }
+          // Si la eliminación es exitosa, actualizamos la lista local de cocheras
+    this.cocheras = this.cocheras.filter(cochera => cochera.id !== id);
+  }).catch(error => {
+    console.error('Error al eliminar el estacionamiento:', error);
+    });
   }
 }
 

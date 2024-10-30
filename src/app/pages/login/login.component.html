@@ -6,17 +6,18 @@
             <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
                 <h3>¡Bienvenido!</h3>
                 <input type="text" id="usuario" placeholder="Usuario" name="username" ngModel required>
-                <input type="text" id="contraseña" placeholder="Contraseña" name="password" ngModel required>
+                <input type="password" id="contraseña" placeholder="Contraseña" name="password" ngModel required>
                 <div class="buttonContainer">
                     <button [disabled]="loginForm.invalid" class="boton1" type="submit">
                         Iniciar sesión
                     </button><!--linkeado con logincomponent.ts-->
-                    @if(errorLogin){
-                        <p>Error en login</p>
-                    }
                     <button [routerLink]="['/register']">Registrarse</button>
                 </div>
+                @if(errorLogin){
+                    <p>Error en login</p>
+                }
             </form>
+            
         </div>
     </main>
 </body>
