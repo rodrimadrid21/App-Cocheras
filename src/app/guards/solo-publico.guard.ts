@@ -11,7 +11,7 @@ export const soloLogeadoGuard: CanActivateFn = (route, state) => {
   if (dataAuthService.usuario?.token) return true;
 
   // Si no está logueado, redirigir a login
-  const url = router.parseUrl('/login');
+  const url = router.parseUrl('/login');// Redirigir a login si no está logueado
   return new RedirectCommand(url);
 };
 

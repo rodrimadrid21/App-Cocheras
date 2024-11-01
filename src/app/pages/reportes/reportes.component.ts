@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataEstacionamientosService } from '../../services/data-estacionamiento.service';
+import { DataCocherasService } from '../../services/data-cocheras.service';
 
 @Component({
   selector: 'app-reportes',
@@ -11,4 +12,5 @@ import { DataEstacionamientosService } from '../../services/data-estacionamiento
 })
 export class ReportesComponent {
   dataEstacionamientoService = inject(DataEstacionamientosService)
+  dataCocheraService = inject(DataCocherasService)
 }

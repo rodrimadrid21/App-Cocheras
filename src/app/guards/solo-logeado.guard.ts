@@ -1,15 +1,16 @@
-// solo-logeado.guard.ts
+import { inject } from '@angular/core';
 import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
 import { DataAuthService } from '../services/data-auth.service';
-import { inject } from '@angular/core';
 
-export const soloLogeadoGuard: CanActivateFn = (route, state) => {
+export const soloPublicoGuard: CanActivateFn = (route, state) => {
   const dataAuthService = inject(DataAuthService);
   const router = inject(Router);
 
-  // Permitir acceso solo si el usuario está logueado
-  if (dataAuthService.usuario?.token) return true;  
-  const url = router.parseUrl('/login');  // Redirigir a login si no está logueado
-  return new RedirectCommand(url);
-};
+  //Si no hay usuario autenticado, solo acceden a ciertas rutas públicas(login/register)
+  if (!dataAuthService.usuario) return true;
 
+  //Si el usuario está autenticado, se crea una URL para redirigir a la ruta /estado-cocheras.
+  const url = router.parseUrl('/estado-cocheras');
+  return new RedirectCommand(url);
+
+};

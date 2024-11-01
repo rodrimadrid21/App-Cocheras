@@ -3,11 +3,11 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { EstadoCocherasComponent } from './pages/estado-cocheras/estado-cocheras.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { soloLogeadoGuard } from './guards/solo-logeado.guard';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { DashboardContentComponent } from './pages/dashboard-content/dashboard-content.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { PreciosComponent } from './pages/precios/precios.component';
+import { soloLogeadoGuard } from './guards/solo-publico.guard';
 
 export const routes: Routes = [
     {
