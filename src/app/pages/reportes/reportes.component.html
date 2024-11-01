@@ -10,9 +10,8 @@
         <tbody>
             @for (transaccion of this.dataEstacionamientoService.ultimasTransacciones; track $index) {
                 <tr>
-                    <td>
-                        {{ transaccion.id }}
-                    </td>
+                    
+                    <td>{{ transaccion.cochera?.descripcion }}</td>
                     <td>
                         {{ transaccion.patente }}
                     </td>

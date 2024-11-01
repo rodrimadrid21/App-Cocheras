@@ -15,7 +15,6 @@ export class DataCocherasService {
   estacionamientos: Estacionamiento[] = []
   
   authService = inject(DataAuthService);
-
   constructor() {
     this.loadData()
   }
@@ -26,16 +25,27 @@ export class DataCocherasService {
     this.asociarEstacionamientosConCocheras();
   }
 
-  async getCocheras(){
-    const res = await fetch(environment.API_URL+'Cochera',{
-      headers: {
-        authorization:'Bearer '+localStorage.getItem("authToken")
-      },
+  async getCocheras() {
+    const res = await fetch(environment.API_URL + 'Cochera', {
+        headers: {
+            authorization: 'Bearer ' + localStorage.getItem("authToken")
+        },
     });
-    if(res.status !== 200) return;
-    const resJson:iCochera[] = await res.json();
-    this.cocheras = resJson;
-  }
+    if (res.status !== 200) return;
+    
+    const resJson: iCochera[] = await res.json();
+    
+    // Ordenar las cocheras por `id` de menor a mayor
+    const sortedCocheras = resJson.sort((a, b) => a.id - b.id);
+    
+    // Agregar un número secuencial comenzando desde 1
+    this.cocheras = sortedCocheras.map((cochera, index) => ({
+        ...cochera,
+        numeroVirtual: index + 1 // Agrega el número virtual a cada cochera
+    }));
+}
+
+
 
   async getEstacionamientos() {
     const res = await fetch(environment.API_URL+'Estacionamiento', {
@@ -186,6 +196,7 @@ export class DataCocherasService {
       this.loadData();
     };   
   }
+  
 
   async deleteEstacionamiento(id: number): Promise<void> {
     const token = this.authService.getToken();

@@ -6,7 +6,7 @@
         <thead>
             <td>Nro</td>
             <td>Disponibilidad</td>
-            <td>Ingreso</td>
+            <td>Cochera</td>
             <td>Acciones</td>
         </thead>
         <tbody>
@@ -14,21 +14,8 @@
             @for (cochera of dataCocherasService.cocheras; track $index) {
                 <tr>
                     <td>
-                        @if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
-                            <div class="disponibilidad1">
-                                {{ cochera.id }}
-                            </div>
-                        }
-                        @else if (cochera.deshabilitada) {
-                            <div class="disponibilidad0">
-                                {{ cochera.id }}
-                            </div>
-                        }
-                        @else {
-                            <div class="disponibilidad">
-                                {{ cochera.id }}
-                            </div>
-                        }
+                        {{ cochera.numeroVirtual }}
+
                     </td>
                     <td>
                         @if (!cochera.estacionamiento?.horaEgreso && cochera.estacionamiento?.horaIngreso) {
